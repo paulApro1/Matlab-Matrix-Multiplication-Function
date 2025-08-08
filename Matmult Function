@@ -1,14 +1,29 @@
 function C = matmult(A, B)
-% Write comments about assumptions about A and B
-% & what the code does
-% Matrix Multiply of A & B
-% n_cols_A == n_rows_B
+% MATMULT Matrix multiplication of two matrices A and B.
+%
+% Assumptions about inputs:
+%   - A and B are both 2D numeric matrices.
+%   - The number of columns of A must be equal to the number of rows of B.
+%   - No checks are made for whether A or B are empty matrices, or whether they contain only numeric types.
+%
+% What this code does:
+%   - Checks for matrix size compatibility (n_cols_A == n_rows_B).
+%   - Initializes the output matrix C with zeros, sized (n_rows_A x n_cols_B).
+%   - Performs classic triple-nested loop matrix multiplication:
+%       C(i, j) = sum_over_k (A(i, k) * B(k, j)).
+%   - Measures and displays the elapsed time for the multiplication.
+%
+% Example usage:
+%   C = matmult([1 2; 3 4], [5; 6]);
+
 [n_rows_A, n_cols_A] = size(A);
 [n_rows_B, n_cols_B] = size(B);
+
 % Tripwire for size requirement
 if n_cols_A ~= n_rows_B
     error('incompatible matrix sizes!')
 end
+
 tic;
 n = n_cols_A; % Or n_rows_B
 C = zeros(n_rows_A, n_cols_B);
