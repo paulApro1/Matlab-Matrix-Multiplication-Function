@@ -1,0 +1,23 @@
+function C = matmult(A, B)
+% Write comments about assumptions about A and B
+% & what the code does
+% Matrix Multiply of A & B
+% n_cols_A == n_rows_B
+[n_rows_A, n_cols_A] = size(A);
+[n_rows_B, n_cols_B] = size(B);
+% Tripwire for size requirement
+if n_cols_A ~= n_rows_B
+    error('incompatible matrix sizes!')
+end
+tic;
+n = n_cols_A; % Or n_rows_B
+C = zeros(n_rows_A, n_cols_B);
+for i = 1:1:n_rows_A
+    for j = 1:1:n_cols_B
+        for k = 1:1:n
+            C(i, j) = C(i, j)  + A(i, k) .* B(k, j);
+        end
+    end
+end
+toc;
+end
